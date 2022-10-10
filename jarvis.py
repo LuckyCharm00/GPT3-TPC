@@ -6,7 +6,7 @@ def open_file(filepath):
 
 openai.api_key = open_file('openai_API_KEY.txt')
 
-def gpt3_completion(prompt, engine='text-davinci-002', temp=0.7, top_p=1.0, tokens=400, freq_pen=0.0, press_pen=0.0, stop=['JAX:', 'USER:']):
+def gpt3_completion(prompt, engine='text-davinci-002', temp=0.7, top_p=1.0, tokens=400, freq_pen=0.0, press_pen=0.0, stop=['JARVIS:', 'USER:']):
   # if temp is increased, sometimes GPT3 will produce USER Prompt and we don't want that.
   # stop tells GPT3 to stop when it happens.
   prompt = prompt.encode(encoding='ASCII', errors='ignore').decode()
