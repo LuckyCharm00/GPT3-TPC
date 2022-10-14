@@ -4,8 +4,6 @@ def open_file(filepath):
   with open(filepath, 'r', encoding='utf-8') as infile:
     return infile.read()
 
-openai.api_key = open_file('openai_API_KEY.txt')
-
 def gpt3_completion(prompt, engine='text-davinci-002', temp=0.7, top_p=1.0, tokens=400, freq_pen=0.0, press_pen=0.0, stop=['JARVIS:', 'USER:']):
   # if temp is increased, sometimes GPT3 will produce USER Prompt and we don't want that.
   # stop tells GPT3 to stop when it happens.
@@ -22,6 +20,11 @@ def gpt3_completion(prompt, engine='text-davinci-002', temp=0.7, top_p=1.0, toke
   return text
 
 if __name__ == '__main__':
+  conv_path = "C:/Users/ariel/OneDrive/Documents/GitHub/GPT3-TPC/conversation.txt"
+  api_path = "C:/Users/ariel/OneDrive/Documents/GitHub/GPT3-TPC/openai_API_KEY.txt"
+
+  openai.api_key = open_file(api_path)
+  
   conversation = list()
 
   while True:
@@ -29,7 +32,7 @@ if __name__ == '__main__':
     conversation.append('USER: %s' % user_input)
 
     text_block = '\n'.join(conversation)
-    prompt = open_file('conversation.txt').replace('<<BLOCK>>', text_block)
+    prompt = open_file(conv_path).replace('<<BLOCK>>', text_block)
     
     prompt = prompt + '\JARVIS:'
     jarvis_response = gpt3_completion(prompt)
